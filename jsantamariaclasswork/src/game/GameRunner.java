@@ -10,7 +10,7 @@ public class GameRunner {
 
     public static void main (String[] args)
     {
-        Room[][][] map = new Room[3][5][5];
+        Room[][][] map = new Room[3][3][3];
         for(int x = 0; x < map.length; x++) {
 	        for (int j = 0; j<map.length; j++)
 	        {
