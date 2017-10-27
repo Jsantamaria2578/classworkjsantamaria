@@ -5,11 +5,11 @@ import rooms.Room;
 public class Board {
 
 
-    private Room[][] schoolMap;
+    private Room[][][] schoolMap;
 
 
 
-    public Board(Room[][] schoolMap)
+    public Board(Room[][][] schoolMap)
     {
         this.schoolMap = schoolMap;
     }
@@ -17,23 +17,25 @@ public class Board {
     public void printMap()
     {
 
-
-        for(Room[] row : schoolMap)
-        {
-            for (Room room : row)
-            {
-                room.print();
-            }
-            System.out.println();
-        }
+    	for(Room[][] floor:schoolMap) {
+    		for(Room[] row : floor)
+    		{
+    			for (Room room : row)
+	            {
+	                room.print();
+	            }
+	            System.out.println();
+	        }
+    		System.out.println();
+	    }
     }
-    public Room[][] getSchoolMap() {
+    public Room[][][] getSchoolMap() {
         return schoolMap;
     }
 
-    public void setSchoolMap(Room[][] schoolMap) {
+    public void setSchoolMap(Room[][][] schoolMap) {
         this.schoolMap = schoolMap;
     }
 
-
+    
 }

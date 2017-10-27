@@ -10,21 +10,22 @@ public class GameRunner {
 
     public static void main (String[] args)
     {
-        Room[][] map = new Room[5][5];
-        for (int j = 0; j<map.length; j++)
-        {
-        	Room[] row = map[j];
-            for (int i = 0; i<row.length;i++)
-            {
-                boolean[] doors = {true,true,true,true};
-                Person[] people = {};
-                Item[] items = {};
-
-                row[i] = new Hallway(doors, people, items, i, j);
-            }
-
+        Room[][][] map = new Room[3][5][5];
+        for(int x = 0; x < map.length; x++) {
+	        for (int j = 0; j<map.length; j++)
+	        {
+	        	Room[] row = map[x][j];
+	            for (int i = 0; i<row.length;i++)
+	            {
+	                boolean[] doors = {true,true,true,true};
+	                Person[] people = {};
+	                Item[] items = {};
+	
+	                row[i] = new Hallway(doors, people, items, i, j);
+	            }
+	
+	        }
         }
-
         School tech = new School(map);
 
 
