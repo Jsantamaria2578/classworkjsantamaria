@@ -3,12 +3,14 @@ package rooms;
 import people.Person;
 import items.Item;
 
-
 public class Hallway extends Room {
 
-    public Hallway(boolean[] doors, Person[] people, Item[] items, int x, int y)
+    private String[] doorlocations;
+
+	public Hallway(boolean[] doors, Person[] people, Item[] items, int x, int y,String[]doorLocations)
     {
         super(doors, people, items, x, y);
+        this.doorlocations = doorLocations;
     }
 
     public void print()
@@ -51,4 +53,13 @@ public class Hallway extends Room {
     	
     	return response;
     }
+    
+    public String generateAllDirection() {
+    	if(doorlocations.length == 1) {
+    		return "An entrance can be seen to the" + doorlocations[0];
+    	}
+    	if(doorlocations.length == 2)
+    		return "Theres an entrance to the " + doorlocations[0] + " and " + doorlocations[1] + ".";
+    	if(doorlocations.length == 3)
+    		return "You see many entrances, one to the " + doorlocations[0] + ", the " + doorlocations[1] + ", and " + doorlocations[2] + ".";
 }

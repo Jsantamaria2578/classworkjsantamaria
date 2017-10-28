@@ -11,6 +11,5 @@ public abstract class Person {
 		this.item = item;
 	}
 	
-	public abstract String setCordinate(int floor);
 	
 }

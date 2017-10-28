@@ -11,7 +11,4 @@ public class Human extends Person {
 		this.decision = decision;
 	}
 	
-	public String setCordinate(int floor) {
-		 return floor + "'" + (int) Math.random() * 10 + (int) Math.random() * 10 ; /* MOVE THIS TO UTILITES*/
-	}
 }

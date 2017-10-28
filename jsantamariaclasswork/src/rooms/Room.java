@@ -55,6 +55,10 @@ public abstract class Room {
     	return y;
     }
     public abstract void print();
+    public abstract String generateAllDirection(String[] doors);
+    public static String generateOneDirection(String door) {
+    	return ""; /*might not need this after all"*/
+}
 
 
 
