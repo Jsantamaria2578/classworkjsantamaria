@@ -6,11 +6,13 @@ import items.Item;
 public class Hallway extends Room {
 
     private String[] doorlocations;
+    private boolean player;
 
-	public Hallway(boolean[] doors, Person[] people, Item[] items, int x, int y,String[]doorLocations)
+	public Hallway(boolean[] doors, Person[] people, Item[] items, int x, int y,String[]doorLocations, boolean player)
     {
         super(doors, people, items, x, y);
         this.doorlocations = doorLocations;
+        this.player = player;
     }
 
     public void print()
