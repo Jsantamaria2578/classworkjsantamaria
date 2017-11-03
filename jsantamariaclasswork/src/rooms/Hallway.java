@@ -1,8 +1,7 @@
 package rooms;
 
-import people.Person;
 import People.NPC;
-import items.Item;
+import Items.Item;
 
 public class Hallway extends Room {
 
@@ -12,8 +11,13 @@ public class Hallway extends Room {
     private int items;
     private boolean itemExist;
     private boolean explored;
+    public String roomtext;
+    private boolean boss;
+    private NPC people;
+    private String dialougue;
+    private String persondescription;
 
-	public Hallway(NPC people,boolean itemExist, Item items, int x, int y,String[]doorLocations, boolean player,String description,boolean explored)
+	public Hallway(NPC people,String dialougue, String persondescription,boolean itemExist, Item items, int x, int y,String[]doorLocations, boolean player,String description,boolean explored)
     {
         super(people, items, x, y);
         this.doorlocations = doorLocations;
@@ -21,6 +25,27 @@ public class Hallway extends Room {
         this.description = description;
         this.itemExist = itemExist;
         this.explored = explored;
+        this.dialougue = dialougue;
+        this.persondescription = persondescription;
+        if(this.itemExist)
+    		this.roomtext = this.description + " " + this.generateAllDirection() + "Theres an " + this.persondescription + ". they say " + this.dialougue + "." + " You see an something in the corner of the room";
+    	else
+    		this.roomtext = this.description + " " + this.generateAllDirection();
+    }
+	
+	public Hallway(NPC people,boolean itemExist, Item items, int x, int y,String[]doorLocations, boolean player,String description,boolean explored, boolean boss)
+    {
+        super(people, items, x, y);
+        this.doorlocations = doorLocations;
+        this.player = player;
+        this.description = description;
+        this.itemExist = itemExist;
+        this.explored = explored;
+        if(this.itemExist)
+    		this.roomtext = this.description + " " + this.generateAllDirection() + "Theres an " + this.persondescription + ". they say " + this.dialougue + "." + "  You see an something in the corner of the room";
+    	else
+    		this.roomtext = this.description + " " + this.generateAllDirection();
+        this.boss = boss;
     }
 
     public void print()
@@ -41,6 +66,10 @@ public class Hallway extends Room {
     }
     public void togglePlayer() {
     	this.player = !this.player;
+    }
+    
+    public void toggleExplore() {
+    	this.explored = true;
     }
     public String toString()
     {
@@ -74,13 +103,10 @@ public class Hallway extends Room {
     		return "Theres an entrance to the " + doorlocations[0] + " and " + doorlocations[1] + ".";
     	if(doorlocations.length == 3)
     		return "You see many entrances, one to the " + doorlocations[0] + ", the " + doorlocations[1] + ", and " + doorlocations[2] + ".";
+    	if(doorlocations.length == 4)
+    		return "You see many entrances, one to the " + doorlocations[0] + ", the " + doorlocations[1] + ", the " + doorlocations[2] + ", and " + doorlocations[3] + ".";
     	return null;
     	}
-    	
-    public String createDescription() {
-    	if(this.itemExist)
-    		return this.description + " " + this.generateAllDirection() + " You see an something in the corner of the room";
-    	else
-    		return this.description + " " + this.generateAllDirection();
-    }
 }
+    	
+

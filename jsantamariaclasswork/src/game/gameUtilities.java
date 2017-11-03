@@ -1,33 +1,12 @@
 package game;
 
 import rooms.Hallway;
+import rooms.Room;
 
 public class gameUtilities {
-	private static int posx;
-	private static int posy;
-	public static String setCordinate(int floor) {
-		 return floor + "'" + (int) Math.random() * 10 + (int) Math.random() * 10 ; /* MOVE THIS TO UTILITES*/
-	}
-	
-	public static void moveplayer(String direction, Hallway room) {
-		if(direction.equals("north") && findDoorNorth(room) ) {
-			posy = posy - 1;
-		}
-		else if(direction.equals("south") && findDoorSouth(room) ) {
-			posy = posy + 1;
-		}
-		else if(direction.equals("west") && findDoorWest(room) ) {
-			posx = posx - 1;
-		}
-		else if(direction.equals("east") && findDoorEast(room) ) {
-			posx = posx + 1;
-		}
-		else
-			System.out.println("what did you say?" );
-	}
-	public static String[] findDoors(int x, int y) {
-		if(x == 3) {
-			if( y ==3) {
+	public static String[] findDoors(int y, int x) {
+		if(x == 2) {
+			if( y == 2) {
 				String[] tempstring = {"North","West"};
 				return tempstring;
 			}
@@ -41,7 +20,7 @@ public class gameUtilities {
 			}
 		}
 		else if(x == 0) {
-			if( y ==3) {
+			if( y ==2) {
 				String[] tempstring = {"North","East"};
 				return tempstring;
 			}
@@ -55,7 +34,7 @@ public class gameUtilities {
 			}
 		}
 		else {
-			if(y ==3) {
+			if(y == 2) {
 				String[] tempstring = {"North","East","West"};
 				return tempstring;
 			}
@@ -63,11 +42,9 @@ public class gameUtilities {
 				String[] tempstring = {"South","East","West"};
 				return tempstring;
 			}
-			else {
-				String[] tempstring = {"North","East","South","West"};
-				return tempstring;
-			}
 		}
+		String[] tempstring = {"North","East","South","West"};
+		return tempstring;
 	}
 		public static int findKeyword(String statement, String goal,int startPos) {
 			String phrase = statement.trim().toLowerCase();
@@ -114,8 +91,10 @@ public class gameUtilities {
 				if(room.doorlocations[i].equals("doordirection")){
 					return true;
 			 }
+			}
 			return false;
 				
+		
 		}
 		
 		public static boolean findDoorNorth(Hallway room) {

@@ -1,8 +1,7 @@
 package game;
 
-import items.Item;
+import Items.Item;
 import rooms.*;
-import people.Person;
 import java.util.Scanner;
 
 import People.Human;
@@ -13,41 +12,43 @@ public class GameRunner {
 
     public static void main (String[] args)
     {
-    	int[] playerCords = {(int) Math.random() * 4, (int) Math.random() * 4};
-        Room[][][] map = new Room[3][3][3];
+    	 int[] playerCords = {(int) (Math.random() * 3), (int) ( Math.random() * 3)};
+    	 int[] bossCords = {(int) (Math.random() * 3), (int) ( Math.random() * 3)};
+    	Hallway[][][] map = new Hallway[3][3][3];
         for(int x = 0; x < map.length; x++) {
+        	Hallway[][] floor = map[x];
 	        for (int j = 0; j<map.length; j++)
 	        {
-	        	Room[] row = map[x][j];
+	        	Hallway[] row = floor[j];
 	            for (int i = 0; i<row.length;i++)
-	            {
+	            {	
+	            	Item items = new Item("fork",true);
 	                String[] doors = gameUtilities.findDoors(j,i);
-	                NPC people = new NPC("test1","doesnt matter",items,"help","deadly ill");
+	                NPC people = new NPC("test1","doesnt matter",items,"help","deadly ill potato");
 	                		// for reference again public NPC(String name, String location, String item, String dialouge, String description){
-	                Item[] items = {};
-	                if(j == playerCords[0]&& i == playerCords[1])
-	                	row[j] = new Hallway(people, items, i, j,doors,true);
+	                if(j == playerCords[0]&& i == playerCords[1] && x == 0)
+	                	row[i] = new Hallway(people,people.dialougue,people.description, true, items, i, j,doors,true,"A dank room", true);
 	                // my hallway for reference 	public Hallway(Person[] people, Item[] items, int x, int y,String[]doorLocations, boolean player)
 	                else
-	                	row[j] = new Hallway(people, items, i, j,doors,false);
+	                	row[i] = new Hallway(people,people.dialougue,people.description,true, items, i, j,doors,false,"A dank room", false);
 	            }
-	
+	            
 	        }
         }
         Board tech = new Board(map);
         gameUtilities gameUtilities = new gameUtilities();
 
-        Item[] playerbag = new Item[2];
+        Item playerbag = new Item("not a potato",true);
         boolean gameOn = true;
         Human player1 = new Human("spud","doesntmatter", playerbag);
         Scanner in = new Scanner(System.in);
         System.out.println("Hello there, welcome to the start of your journey! Are you a boy or a girl?");
         in.next();
-        System.out.println("I see, your a potato, thats perfect you'll fit right in to this story");
+        System.out.println("I see, your a potato, thats perfect you'll fit right in to this story,Whats your name?");
         in.next();
         System.out.println("Spud, thats an oddly convinient name for this story.");
         System.out.println("Now spud, are you ready to start your journey?.");
-        
+        in.next();
         System.out.println("Great lets get started!");
         System.out.println("Spud, thats an oddly convinient name for this story.");
         System.out.println("You are a potato. But not any normal potato for you see you were born with special powers");
@@ -82,29 +83,40 @@ public class GameRunner {
     	System.out.println("You cant find your brother and run around everywhere, your lost, but not before");
     	System.out.println("you realize, you have no brother.");
     	System.out.println("It might have not been your brother, but it could have been someone elses brother and you must save them.");
-    	int posx = 0;
-    	int posy = 0;
-        while(gameOn)
+    	int posx = playerCords[0];
+ 	    int posy = playerCords[1];
+ 	    int posz = 0;
+    	while(gameOn)
         {
-            System.out.println("Where would you like to move");
-         //   map[0][0].addOccupant(player1);
-
+         //   map[0][0].addOccupant(player1)
             tech.printMap();
+            System.out.println(map[1][posx][posy].roomtext);
+            map[0][posx][posy].togglePlayer();
+            map[0][posx][posy].toggleExplore();
+            String direction = in.next();
           //  player1.printRoom();
-            String move = player1.chooseMove();
-            Utilities.movePlayer(tech, player1,move);
-            //gameOn = false;
+            if(direction.equals("west")) {
+    			posy = posy - 1;
+    		}
+    		else if(direction.equals("east")) {
+    			posy = posy + 1;
+    		}
+    		else if(direction.equals("north")) {
+    			posx = posx - 1;
+    		}
+    		else if(direction.equals("south")) {
+    			posx = posx + 1;
+    		}
+    		else
+    			System.out.println("what did you say?" );
+            map[0][posx][posy].togglePlayer();
             
-
-
-
-
-
-
+            
+            //gameOn = false;
 
         }
 		in.close();
-    }
+		}
 
 }
 

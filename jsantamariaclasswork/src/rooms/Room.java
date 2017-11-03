@@ -1,6 +1,6 @@
 package rooms;
 
-import items.Item;
+import Items.Item;
 
 import java.util.Arrays;
 
@@ -8,13 +8,14 @@ import People.NPC;
 
 public abstract class Room {
 
-    private boolean[] doors;
+    public static String roomtext;
+	private boolean[] doors;
     private NPC occupants;
     private Item items;
     public boolean explored;
     private int x, y;
 
-    public Room (boolean[] doors, NPC occupants, Item items, int x, int y)
+    public Room (NPC occupants, Item items, int x, int y)
     {
     	this.x = x;
     	this.y = y;
@@ -44,7 +45,7 @@ public abstract class Room {
     	return y;
     }
     public abstract void print();
-    public abstract String generateAllDirection(String[] doors);
+    public abstract String generateAllDirection();
     public static String generateOneDirection(String door) {
     	return ""; /*might not need this after all"*/
 }
