@@ -1,25 +1,33 @@
 package rooms;
 
 import people.Person;
+import People.NPC;
 import items.Item;
 
 public class Hallway extends Room {
 
-    private String[] doorlocations;
+    public String[] doorlocations;
     private boolean player;
+    private String description;
+    private int items;
+    private boolean itemExist;
+    private boolean explored;
 
-	public Hallway(boolean[] doors, Person[] people, Item[] items, int x, int y,String[]doorLocations, boolean player)
+	public Hallway(NPC people,boolean itemExist, Item items, int x, int y,String[]doorLocations, boolean player,String description,boolean explored)
     {
-        super(doors, people, items, x, y);
+        super(people, items, x, y);
         this.doorlocations = doorLocations;
         this.player = player;
+        this.description = description;
+        this.itemExist = itemExist;
+        this.explored = explored;
     }
 
     public void print()
     {
-        if (getOccupants().length != 0)
+        if (this.player)
         {
-            System.out.print(getOccupants()[0].print());
+            System.out.print("[ P ]");
         }
         else if (this.explored)
         {
@@ -31,7 +39,9 @@ public class Hallway extends Room {
         }
 
     }
-    
+    public void togglePlayer() {
+    	this.player = !this.player;
+    }
     public String toString()
     {
     	boolean[] doors = this.getDoors();
@@ -64,4 +74,13 @@ public class Hallway extends Room {
     		return "Theres an entrance to the " + doorlocations[0] + " and " + doorlocations[1] + ".";
     	if(doorlocations.length == 3)
     		return "You see many entrances, one to the " + doorlocations[0] + ", the " + doorlocations[1] + ", and " + doorlocations[2] + ".";
+    	return null;
+    	}
+    	
+    public String createDescription() {
+    	if(this.itemExist)
+    		return this.description + " " + this.generateAllDirection() + " You see an something in the corner of the room";
+    	else
+    		return this.description + " " + this.generateAllDirection();
+    }
 }
