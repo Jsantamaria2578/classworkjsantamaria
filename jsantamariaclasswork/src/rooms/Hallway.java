@@ -7,12 +7,12 @@ public class Hallway extends Room {
 
     public String[] doorlocations;
     private boolean player;
-    private String description;
+    public String description;
     private int items;
     private boolean itemExist;
     private boolean explored;
     public String roomtext;
-    private boolean boss;
+    public boolean boss;
     private NPC people;
     private String dialougue;
     private String persondescription;
@@ -33,9 +33,9 @@ public class Hallway extends Room {
     		this.roomtext = this.description + " " + this.generateAllDirection();
     }
 	
-	public Hallway(NPC people,boolean itemExist, Item items, int x, int y,String[]doorLocations, boolean player,String description,boolean explored, boolean boss)
+	public Hallway(int x, int y,String[]doorLocations, boolean player,String description,boolean explored, boolean boss)
     {
-        super(people, items, x, y);
+        super(null, null, x, y);
         this.doorlocations = doorLocations;
         this.player = player;
         this.description = description;
@@ -57,6 +57,10 @@ public class Hallway extends Room {
         else if (this.explored)
         {
             System.out.print("[ H ]");
+        }
+        else if (this.explored && this.boss == true)
+        {
+            System.out.print("[ B ]");
         }
         else
         {

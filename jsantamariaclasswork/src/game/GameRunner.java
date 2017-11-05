@@ -11,9 +11,14 @@ import board.Board;
 public class GameRunner {
 
     public static void main (String[] args)
-    {
+    {	
+    	 String[] randomRoomDescriptions = {"A small room with a foul smell.","A cold room with many meats.","The room is mostly empty aside from the boxes inside of it.","You see many humans when you enter the room, its packed, luckily they dont see you."};
+    	 String[] randomNpcDescripion = {"A young tato,poor thing, hasnt even grown his buds","A sweet potato, hes not one of your kind","Oh gods, its a potato stripped of everything, hes been turned into a fry","You vomit a little,its, its a chip"};
+    	 String[] randomNpcDialouge = {"I'm,I'm scared, please save me","They, they took my family","Dead, I want them all dead","nothing","help me"};
     	 int[] playerCords = {(int) (Math.random() * 3), (int) ( Math.random() * 3)};
     	 int[] bossCords = {(int) (Math.random() * 3), (int) ( Math.random() * 3)};
+    	 int[] bossCords2 = {(int) (Math.random() * 3), (int) ( Math.random() * 3)};
+    	 int[] bossCords3 = {(int) (Math.random() * 3), (int) ( Math.random() * 3)};
     	Hallway[][][] map = new Hallway[3][3][3];
         for(int x = 0; x < map.length; x++) {
         	Hallway[][] floor = map[x];
@@ -24,13 +29,19 @@ public class GameRunner {
 	            {	
 	            	Item items = new Item("fork",true);
 	                String[] doors = gameUtilities.findDoors(j,i);
-	                NPC people = new NPC("test1","doesnt matter",items,"help","deadly ill potato");
+	                NPC people = new NPC("test1","doesnt matter",items,randomNpcDialouge[(int) (Math.random() * randomNpcDialouge.length)], randomNpcDescripion[(int) (Math.random() * randomNpcDescripion.length)]);
 	                		// for reference again public NPC(String name, String location, String item, String dialouge, String description){
 	                if(j == playerCords[0]&& i == playerCords[1] && x == 0)
-	                	row[i] = new Hallway(people,people.dialougue,people.description, true, items, i, j,doors,true,"A dank room", true);
+	                	row[i] = new Hallway(people,people.dialougue,people.description, true, items, i, j,doors,true, randomRoomDescriptions[(int) (Math.random() * randomRoomDescriptions.length)], true);
 	                // my hallway for reference 	public Hallway(Person[] people, Item[] items, int x, int y,String[]doorLocations, boolean player)
+	                if (j == bossCords[0]&& i == bossCords[1] && x == 0)
+	                	row[i] = new Hallway(i, j,doors,true, "Its an employee!? He stands in the way of the staircase leading up! What will you do!", true,true);
+	                if (j == bossCords2[0]&& i == bossCords2[1] && x == 1)
+	                	row[i] = new Hallway(i, j,doors,true, "There he is the man who loaded all those innocent potatoes in the truck, how will you deal with this one?", true,true);
+	                if (j == bossCords3[0]&& i == bossCords3[1] && x == 2)
+	                	row[i] = new Hallway(i, j,doors,true,"there he is, the man who demanded all the potatoes, you can tell by the money in his hands and the logo, the two yellow arches on his shirt, nows your chance to avenge your bretherin", true,true);
 	                else
-	                	row[i] = new Hallway(people,people.dialougue,people.description,true, items, i, j,doors,false,"A dank room", false);
+	                	row[i] = new Hallway(people,people.dialougue,people.description,true, items, i, j,doors,false, randomRoomDescriptions[(int) (Math.random() * randomRoomDescriptions.length)], false);
 	            }
 	            
 	        }
@@ -90,26 +101,72 @@ public class GameRunner {
         {
          //   map[0][0].addOccupant(player1)
             tech.printMap();
-            System.out.println(map[1][posx][posy].roomtext);
-            map[0][posx][posy].togglePlayer();
-            map[0][posx][posy].toggleExplore();
-            String direction = in.next();
-          //  player1.printRoom();
-            if(direction.equals("west")) {
-    			posy = posy - 1;
-    		}
-    		else if(direction.equals("east")) {
-    			posy = posy + 1;
-    		}
-    		else if(direction.equals("north")) {
-    			posx = posx - 1;
-    		}
-    		else if(direction.equals("south")) {
-    			posx = posx + 1;
-    		}
-    		else
-    			System.out.println("what did you say?" );
-            map[0][posx][posy].togglePlayer();
+            System.out.println(map[posz][posx][posy].roomtext);
+            map[posz][posx][posy].togglePlayer();
+            map[posz][posx][posy].toggleExplore();
+            if(map[0][posx][posy].boss) {
+            	System.out.println(map[0][posx][posy].description);
+            	String decision = in.next();
+            	if(decision.equals("nothing")) {
+            		System.out.println("You stand still thinking what will you do to him but while you think the employee walks away, you advance to the next floor");
+            		posz++;
+            	}
+            	else if(decision.equals("fight") || decision.equals("attack")) {
+            		System.out.println("You rolled towards the employee aggresivly. Not even looking the employee kicks you away. You land in front of the staircase stunned from the kick. The employee walks forward, again not looking, and attempts to squash you only to slip and fall down the stiars. Your work here is done");
+            		posz++;
+            	}
+            	else
+            		System.out.println("I dont know what you said but it appears that didnt matter as you sneak by the employee and up the stairs, conserving your energy for the real fight");
+            		posz++;
+            }
+            else if(map[1][posx][posy].boss) {
+            	System.out.println(map[0][posx][posy].description);
+            	String decision = in.next();
+            	if(decision.equals("nothing")) {
+            		System.out.println("You stand still thinking what will you do to him but while you think the employee walks away, you advance to the next floor");
+            		posz++;
+            	}
+            	else if(decision.equals("fight") || decision.equals("attack")) {
+            		System.out.println("You rolled towards the employee aggresivly. Not even looking the employee kicks you away. You land in front of the staircase stunned from the kick. The employee walks forward, again not looking, and attempts to squash you only to slip and fall down the stiars. Your work here is done");
+            		posz++;
+            	}
+            	else
+            		System.out.println("I dont know what you said but it appears that didnt matter as you sneak by the employee and up the stairs, conserving your energy for the real fight");
+            		posz++;
+            }
+            else if(map[3][posx][posy].boss) {
+            	System.out.println(map[0][posx][posy].description);
+            	String decision = in.next();
+            	if(decision.equals("nothing")) {
+            		System.out.println("You stand still thinking what will you do to him but while you think the employee walks away, you advance to the next floor");
+            		gameOn = false;
+            	}
+            	else if(decision.equals("fight") || decision.equals("attack")) {
+            		System.out.println("You rolled towards the employee aggresivly. Not even looking the employee kicks you away. You land in front of the staircase stunned from the kick. The employee walks forward, again not looking, and attempts to squash you only to slip and fall down the stiars. Your work here is done");
+            		gameOn = false;
+            	}
+            	else
+            		System.out.println("I dont know what you said but it appears that didnt matter as you sneak by the employee and up the stairs, conserving your energy for the real fight");
+            	gameOn = false;
+            }
+            else {
+	            String direction = in.next();
+	            if(direction.equals("west")) {
+	    			posy = posy - 1;
+	    		}
+	    		else if(direction.equals("east")) {
+	    			posy = posy + 1;
+	    		}
+	    		else if(direction.equals("north")) {
+	    			posx = posx - 1;
+	    		}
+	    		else if(direction.equals("south")) {
+	    			posx = posx + 1;
+	    		}
+	    		else
+	    			System.out.println("what did you say?" );
+	            map[posz][posx][posy].togglePlayer();
+            }
             
             
             //gameOn = false;
