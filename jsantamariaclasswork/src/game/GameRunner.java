@@ -10,6 +10,7 @@ import board.Board;
 
 public class GameRunner {
 
+	//Generates a 3x3x3 map while randomizing the coordinates of the player and the coordinates of the boss
     public static void main (String[] args)
     {	
     	 String[] randomRoomDescriptions = {"A small room with a foul smell.","A cold room with many meats.","The room is mostly empty aside from the boxes inside of it.","You see many humans when you enter the room, its packed, luckily they dont see you."};
@@ -48,7 +49,7 @@ public class GameRunner {
         }
         Board tech = new Board(map);
         gameUtilities gameUtilities = new gameUtilities();
-
+        // Completely ignores player input and forwards the story
         Item playerbag = new Item("not a potato",true);
         boolean gameOn = true;
         Human player1 = new Human("spud","doesntmatter", playerbag);
@@ -104,6 +105,7 @@ public class GameRunner {
             System.out.println(map[posz][posx][posy].roomtext);
             map[posz][posx][posy].togglePlayer();
             map[posz][posx][posy].toggleExplore();
+            //Tests to see if the boss is at the current player's location on all three floors
             if(map[0][posx][posy].boss) {
             	System.out.println(map[0][posx][posy].description);
             	String decision = in.next();
@@ -162,6 +164,7 @@ public class GameRunner {
             		System.out.println("I dont know what you said but it appears that didnt matter as you sneak by the employee and up the stairs, conserving your energy for the real fight");
             	gameOn = false;
             }
+            //Based on player input, moves the player by changing the x and y coordinates of the player.
             else {
 	            String direction = in.next();
 	            if(direction.equals("west")) {

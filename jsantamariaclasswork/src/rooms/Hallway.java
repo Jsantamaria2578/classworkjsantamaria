@@ -47,7 +47,11 @@ public class Hallway extends Room {
     		this.roomtext = this.description + " " + this.generateAllDirection();
         this.boss = boss;
     }
-
+	/*
+	 * For each room in the 3D array, it continuously reprints the map based on the room object's fields.
+	 * Based on the boolean fields of the room objects, the method prints different versions to let the 
+	 * player know where they have explored and where they are currently located.
+	 */
     public void print()
     {
         if (this.player)
@@ -64,10 +68,17 @@ public class Hallway extends Room {
         }
 
     }
+    /*
+     * Toggles the room object's field player from true to false and vice versa so that the print method
+     * can properly print out the map.
+     */
     public void togglePlayer() {
     	this.player = !this.player;
     }
-    
+    /*
+     * Toggles the room object's field explored from true to false that the print method
+     * can properly print out the map.
+     */
     public void toggleExplore() {
     	this.explored = true;
     }
@@ -94,7 +105,12 @@ public class Hallway extends Room {
     	
     	return response;
     }
-    
+    /*
+     * A general method that takes into consideration the the length of the doorlocations array. 
+     * Based on the length, it tells the player where doors are located.
+     * 
+     * @return String that tells the user where doors are located in the current room. 
+     */
     public String generateAllDirection() {
     	if(doorlocations.length == 1) {
     		return "An entrance can be seen to the" + doorlocations[0];

@@ -14,7 +14,10 @@ public class Board {
     {
         this.schoolMap = schoolMap;
     }
-
+    /*
+     * Prints out the map in a readable format using a for loop inside a for loop.
+     * The outside loop for the floor, and the inside loop for the rooms in the floor.
+     */
     public void printMap()
     {
 

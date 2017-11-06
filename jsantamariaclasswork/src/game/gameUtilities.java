@@ -4,6 +4,14 @@ import rooms.Hallway;
 import rooms.Room;
 
 public class gameUtilities {
+	/*
+	 * Based on the two int parameters which represent the players x and y positions in the array,
+	 * the method returns a string array that contains a list of posible directions where doors
+	 * can be located in the room that the player is currently in.
+	 * 
+	 * @param y the y position of the player in the array
+	 * @param x the x position of the player in the array
+	 */
 	public static String[] findDoors(int y, int x) {
 		if(x == 2) {
 			if( y == 2) {
@@ -46,6 +54,16 @@ public class gameUtilities {
 		String[] tempstring = {"North","East","South","West"};
 		return tempstring;
 	}
+		/*
+		 * This general method allows the program to search for keywords that are typed into the console.
+		 * It takes in the two string parameters, statement and goal, and an int parameter and uses it to 
+		 * return the position of the keyword.
+		 * 
+		 * @param statement The entire statement that is typed into the console by the user
+		 * @param goal The keyword that is being looked for
+		 * @param startPos Where the keyword search starts from
+		 * @return An integer that represents the position of the keyword
+		 */
 		public static int findKeyword(String statement, String goal,int startPos) {
 			String phrase = statement.trim().toLowerCase();
 			goal = goal.toLowerCase();
@@ -85,7 +103,15 @@ public class gameUtilities {
 			}
 			return -1;
 			}
-		
+		/*
+		 * A method that searches for rooms in the current room the player is in.
+		 * Takes in a string parameter and a hallway object called room. Based on that, 
+		 * returns a boolean which determines whether the a door is present in that direction
+		 * of the room.
+		 * 
+		 * @param doordirection A string that tells the method which way to look for doors
+		 * @param room A hallway object that represents each room
+		 */
 		public static boolean findDoor(String doordirection,Hallway room) {
 			for(int i = 0;i < room.doorlocations.length; i ++) {
 				if(room.doorlocations[i].equals("doordirection")){
@@ -97,6 +123,14 @@ public class gameUtilities {
 		
 		}
 		
+		/*
+		 * The following four methods below returns a boolean that tells the user
+		 * whether or not there is a door in a specific direction based on the hallway object
+		 * parameter
+		 * 
+		 * @param room A hallway object that represents each room
+		 * @return a boolean using the findDoor method which tells the user if there is a door or not
+		 */
 		public static boolean findDoorNorth(Hallway room) {
 			return findDoor("North",room);
 				
