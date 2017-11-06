@@ -58,10 +58,6 @@ public class Hallway extends Room {
         {
             System.out.print("[ H ]");
         }
-        else if (this.explored && this.boss == true)
-        {
-            System.out.print("[ B ]");
-        }
         else
         {
             System.out.print("[   ]");

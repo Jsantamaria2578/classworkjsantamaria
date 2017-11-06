@@ -35,11 +35,11 @@ public class GameRunner {
 	                	row[i] = new Hallway(people,people.dialougue,people.description, true, items, i, j,doors,true, randomRoomDescriptions[(int) (Math.random() * randomRoomDescriptions.length)], true);
 	                // my hallway for reference 	public Hallway(Person[] people, Item[] items, int x, int y,String[]doorLocations, boolean player)
 	                if (j == bossCords[0]&& i == bossCords[1] && x == 0)
-	                	row[i] = new Hallway(i, j,doors,true, "Its an employee!? He stands in the way of the staircase leading up! What will you do!", true,true);
+	                	row[i] = new Hallway(i, j,doors,false, "Its an employee!? He stands in the way of the staircase leading up! What will you do!", false,true);
 	                if (j == bossCords2[0]&& i == bossCords2[1] && x == 1)
-	                	row[i] = new Hallway(i, j,doors,true, "There he is the man who loaded all those innocent potatoes in the truck, how will you deal with this one?", true,true);
+	                	row[i] = new Hallway(i, j,doors,false, "There he is the man who loaded all those innocent potatoes in the truck, how will you deal with this one?", false,true);
 	                if (j == bossCords3[0]&& i == bossCords3[1] && x == 2)
-	                	row[i] = new Hallway(i, j,doors,true,"there he is, the man who demanded all the potatoes, you can tell by the money in his hands and the logo, the two yellow arches on his shirt, nows your chance to avenge your bretherin", true,true);
+	                	row[i] = new Hallway(i, j,doors,false,"there he is, the man who demanded all the potatoes, you can tell by the money in his hands and the logo, the two yellow arches on his shirt, nows your chance to avenge your bretherin", false,true);
 	                else
 	                	row[i] = new Hallway(people,people.dialougue,people.description,true, items, i, j,doors,false, randomRoomDescriptions[(int) (Math.random() * randomRoomDescriptions.length)], false);
 	            }
@@ -120,22 +120,35 @@ public class GameRunner {
             		posz++;
             }
             else if(map[1][posx][posy].boss) {
-            	System.out.println(map[0][posx][posy].description);
+            	System.out.println(map[1][posx][posy].description);
             	String decision = in.next();
             	if(decision.equals("nothing")) {
-            		System.out.println("You stand still thinking what will you do to him but while you think the employee walks away, you advance to the next floor");
-            		posz++;
+            		System.out.println("The man falls for your trap and picks you up, now that you have him in the palms of your buds what will you do?");
+            		String decision2 = in.next();
+            		if(decision2.equals("nothing")) {
+                		System.out.println("He is examining you so closely he doesnt notice he has one more step, trips and falls, hes not dead but he will remember this pain!");
+                		posz++;
+                	}
+            		else if(decision2.equals("attack")) {
+                		System.out.println("In struggling out of the mans grip you break free and drop, he attempts to capture only to fall over, he lays down in defeat, unconcious, you spare him knowing that this battle will harm his pride and will be crueler than death");
+                		posz++;
+                	}
+            		else {
+            			System.out.println("That plan is so ingenious i didnt understand! However, while you were telling me it the man threw you in the trash and walked away, somehow you managed to climb out, you'll enact your revenge on him another day");
+                		posz++;
+            		}
+            			
             	}
             	else if(decision.equals("fight") || decision.equals("attack")) {
-            		System.out.println("You rolled towards the employee aggresivly. Not even looking the employee kicks you away. You land in front of the staircase stunned from the kick. The employee walks forward, again not looking, and attempts to squash you only to slip and fall down the stiars. Your work here is done");
+            		System.out.println("You roll along the floor accidentally bursting a kethup packet. The man cleverly dodges the packet but slips on the ketchup! He stumbles into a window and falls. Another sould claimed in vengance!");
             		posz++;
             	}
             	else
-            		System.out.println("I dont know what you said but it appears that didnt matter as you sneak by the employee and up the stairs, conserving your energy for the real fight");
+            		System.out.println("I couldnt make out your ingenous plan, however it appears the man has picked you up and threw you behind him to the next flight of stairs, all according to plan!");
             		posz++;
             }
-            else if(map[3][posx][posy].boss) {
-            	System.out.println(map[0][posx][posy].description);
+            else if(map[2][posx][posy].boss) {
+            	System.out.println(map[2][posx][posy].description);
             	String decision = in.next();
             	if(decision.equals("nothing")) {
             		System.out.println("You stand still thinking what will you do to him but while you think the employee walks away, you advance to the next floor");
