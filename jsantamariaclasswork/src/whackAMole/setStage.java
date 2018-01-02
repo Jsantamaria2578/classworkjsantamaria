@@ -6,6 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javax.swing.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.*;
 public class setStage extends Application {
 
@@ -21,6 +23,7 @@ public class setStage extends Application {
 		button.setMinSize(100,100);
 		Label label = new Label("");
 		HBox hbox = new HBox(button,label);
+		
 
 		Scene potato = new Scene(hbox,1200,800);
 		primaryStage.setScene(potato);
