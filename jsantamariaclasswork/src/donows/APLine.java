@@ -6,9 +6,7 @@ public class APLine {
 	private int b;
 	private int c;
 	public static void main(String[] args) {
-		APLine line1 = new APLine(5,4,17);
-		System.out.println(line1.getSlope());
-		System.out.println(line1.isOnLine(5, -2));
+		System.out.println((int)(Math.random() * 3));
 	}
 	public APLine(int a, int b, int c){
 		this.a = a;
@@ -22,6 +20,6 @@ public class APLine {
 	}
 	
 	public boolean isOnLine(int x, int y) {
-		return ((this.a * x) + (this.b * y) - this.c) == 0;
+		return ((this.a * x) + (this.b * y) + this.c) == 0;
 	}
 }

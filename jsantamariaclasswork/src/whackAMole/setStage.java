@@ -30,12 +30,12 @@ public class setStage extends Application {
 
 		flowpane.getChildren().add(button);
 		flowpane.getChildren().add(button1);
-		
-		//button.setVisible(false);
+		flowpane.setStyle("-fx-alignment : top-center");
+		button.setVisible(false);
 		//button1.setVisible(false);
 		// if i have to make visibility differences the buttons will be relative to last? YES... 
 		// flowpane.getChildren().clear(); THIS WORKS 
-		flowpane.setVgap(250);
+		flowpane.setVgap(325);
 		flowpane.setHgap(250);
 		
 		button1.setOnAction(value ->  {
@@ -47,13 +47,26 @@ public class setStage extends Application {
 	           flowpane.setHgap(100);
 	           button1.setVisible(true);
 	           primaryStage.show();*/
-			
-			flowpane.setStyle("-fx-alignment : top-left");
-			double verticalGap = Math.random() *690;// correct max based off top height and width
-			double horizontalGap = Math.random() *600;			// solution: create a random set style, set button one to either the entire top or left hand edge of the screen
-			flowpane.setVgap(verticalGap);						// then create a vgap if its at the top or hgap if its and the left
-	           flowpane.setHgap(0);								// basically creating random intervals
-	           
+	           String[] styleListTop = {"top-left","top-center","top-right"};
+	           String[] styleListLeft = {"top-left","center-left","bottom-left"};
+			if(Math.random() > 0.49) {
+				int random = (int)(Math.random() * 3);
+				button.setMaxSize(1200,10); // this will be the dimensions if the button is at the top
+				button.setMinSize(1200,10);
+				flowpane.setStyle("-fx-alignment : " + styleListTop[random]);
+				double verticalGap = Math.random() *690;
+				flowpane.setVgap(verticalGap);	
+			}
+			else {
+				int random = (int)(Math.random() * 3);
+				flowpane.setStyle("-fx-alignment : " + styleListLeft[random]);
+				button.setMaxSize(10,800); // this will be the dimensions if the button is at the top
+				button.setMinSize(10,800);
+				double horizontalGap = Math.random() *1000;			// solution: create a random set style, set button one to either the entire top or left hand edge of the screen
+				flowpane.setHgap(horizontalGap);						// then create a vgap if its at the top or hgap if its and the left
+		 								// basically creating random intervals
+		           
+				}
 	        });
 		
 		Scene potato = new Scene(flowpane,1200,800);
