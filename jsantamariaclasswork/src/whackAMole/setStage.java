@@ -11,6 +11,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.shape.*;
 import javafx.scene.layout.FlowPane;
 import java.lang.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 public class setStage extends Application {
 
 	public void start(Stage primaryStage) throws Exception{
@@ -74,8 +84,18 @@ public class setStage extends Application {
 		primaryStage.show();
 	}
 	
-	public static void main(String[] args) {
-			Application.launch(args);
+	public static void main(String[] args) throws IOException {
+			//Application.launch(args);
+			try (BufferedWriter pw = new BufferedWriter(new FileWriter("scores.csv"))){
+				String potato = "Name,High Score\n";
+				pw.write(potato);
+				pw.close();
+				System.out.println("END ME IM A FILTHY DEBUGGER");
+			}
+			catch(FileNotFoundException e){
+				System.err.println(e);
+			}
+			
 	}
 
 }
