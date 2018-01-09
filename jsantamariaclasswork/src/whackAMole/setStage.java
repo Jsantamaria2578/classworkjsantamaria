@@ -90,7 +90,6 @@ public class setStage extends Application {
 				String potato = "Name,High Score\n";
 				pw.write(potato);
 				pw.close();
-				System.out.println("END ME IM A FILTHY DEBUGGER");
 			}
 			catch(FileNotFoundException e){
 				System.err.println(e);
