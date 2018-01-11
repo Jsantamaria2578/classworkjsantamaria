@@ -1,5 +1,6 @@
-package whackAMole;
+	package whackAMole;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -28,6 +29,10 @@ import java.awt.*;
 public class setStage extends Application {
 	int count = 0;
 	Label score = new Label("" + count);
+	Label timer = new Label("");
+	int timeLeft = 0;
+	boolean start = false;
+	long secondcounter = System.nanoTime();
 	public void start(Stage primaryStage) throws Exception{
 		 
 		//int count = 0;
@@ -47,9 +52,12 @@ public class setStage extends Application {
 		flowpane.getChildren().add(button);
 		flowpane.getChildren().add(button1);
 		flowpane.getChildren().add(hbox);
+		flowpane.getChildren().add(timer);
 		//hbox.setStyle("-fx-alignment : top-center");
 		hbox.setTranslateX(550);
 		hbox.setTranslateY(75);
+		timer.setTranslateX(550);
+		timer.setTranslateY(125);
 		button1.setTranslateX(500);
 		button1.setTranslateY(300);
 		//score.setAlignment(Pos.CENTER);
@@ -59,6 +67,7 @@ public class setStage extends Application {
 		// flowpane.getChildren().clear(); THIS WORKS 
 		score.setStyle("-fx-font-size : 30pt; -fx-text-fill : #228b22");
 		button1.setOnAction(value ->  {
+			hbox.setTranslateX(550);
 		           /*button1.setVisible(false);
 	           flowpane.getChildren().clear();
 	           flowpane.getChildren().add(button);
@@ -72,8 +81,34 @@ public class setStage extends Application {
 			score.setText("" + count);
 				button1.setTranslateX(Math.random() * 900);
 				button1.setTranslateY((Math.random() * 500) + 100);
+				if(timeLeft == 0) {
+					timeLeft = 10;
+					timer.setText("" + timeLeft);
+					secondcounter = System.nanoTime() + 1000000000L;
+					new AnimationTimer() {	
+						@Override
+						public void handle(long now) {
+							// TODO Auto-generated method stub
+							if(timeLeft == 0) {
+								button1.setTranslateX(500);
+								button1.setTranslateY(300);
+								score.setText("Wow you got a score of " + count + " nice job! Whack the mole to start again");
+								hbox.setTranslateX(25);
+								count = 0;
+								start = false;
+								stop();
+							}
+						   if(now > secondcounter) {
+								timeLeft = timeLeft - 1;
+								timer.setText("" + timeLeft);
+								secondcounter += 1000000000L;
+								
+							}
+						}
+						
+					}.start();
+				}
 	        });
-		
 		Scene potato = new Scene(flowpane,1200,800);
 		primaryStage.setScene(potato);
 		primaryStage.show();
